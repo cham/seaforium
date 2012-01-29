@@ -4,20 +4,11 @@ class Thread extends Controller {
 
   function Thread()
   {
-    parent::Controller();
+    parent::__construct();
 
-    $this->load->helper(array('url', 'date', 'form', 'content_render',
-                              'htmlpurifier'));
+    $this->load->helper(array('url', 'date', 'form', 'content_render', 'htmlpurifier'));
     $this->load->library(array('form_validation', 'pagination'));
     $this->load->model('thread_dal');
-
-    // set all this so we dont have to continually call functions through session
-    $this->meta = array(
-      'user_id' => (int) $this->session->userdata('user_id'),
-      'session_id' => $this->session->userdata('session_id'),
-      'hide_enemy_posts' => $this->session->userdata('hide_enemy_posts'),
-      'comments_shown' => (int) $this->session->userdata('comments_shown') ?: 50,
-    );
   }
 
   // if the just throw in /thread into the address bar
@@ -35,8 +26,7 @@ class Thread extends Controller {
       redirect('/');
 
     // grabbing the thread information
-    $query = $this->thread_dal->get_thread_information($this->meta['user_id'],
-                                                       $thread_id);
+    $query = $this->thread_dal->get_thread_information($this->meta['user_id'], $thread_id);
 
     // does it exist?
     if ($query->num_rows === 0)
@@ -44,11 +34,9 @@ class Thread extends Controller {
 
     $thread_info = $query->row();
 
-    $hidden = explode(',',
-                      $this->thread_dal->get_hidden($this->meta['user_id']));
+    $hidden = explode(',', $this->thread_dal->get_hidden($this->meta['user_id']));
 
-    $favourites = explode(',',
-                          $this->thread_dal->get_favorites($this->meta['user_id']));
+    $favourites = explode(',', $this->thread_dal->get_favorites($this->meta['user_id']));
 
     // alright we're clear, set some data for the view
     $data = array(
@@ -127,7 +115,7 @@ class Thread extends Controller {
         }
       }
     }
-
+	
     if ($pseg === 0)
       $base_url .= '/p';
 
@@ -138,7 +126,7 @@ class Thread extends Controller {
                                       $thread_id,
                                       $limit_start,
                                       $this->meta['comments_shown']);
-
+	
     $data['total_comments'] = $this->thread_dal->comment_count($thread_id);
 
     $this->pagination->initialize(array(
@@ -155,8 +143,8 @@ class Thread extends Controller {
       'num_tag_close' => ''
     ));
 
-    $end = min(array($limit_start + $this->meta['comments_shown'],
-                     $data['total_comments']));
+    $end = min(array($limit_start + $this->meta['comments_shown'], $data['total_comments']));
+	
     $data['pagination'] = $this->pagination->create_links() .
       '<span class="paging-text">'. ($limit_start + 1) .' - '. $end .' of ' .
       $data['total_comments'] .' Posts in <a href="/">Threads</a> &gt; ' .
