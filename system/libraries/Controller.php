@@ -44,10 +44,13 @@ class Controller extends CI_Base {
 		log_message('debug', "Controller Class Initialized");
 		
 		$this->meta = array(
-			'user_id' => (int) $this->session->userdata('user_id'),
+			'user_id' => (int) $this->session->userdata('user_id') ?: 0,
+			'username' => $this->session->userdata('username') ?: 'guest',
 			'session_id' => $this->session->userdata('session_id'),
 			'hide_enemy_posts' => $this->session->userdata('hide_enemy_posts'),
 			'comments_shown' => (int) $this->session->userdata('comments_shown') ?: 50,
+			'threads_shown' => (int) $this->session->userdata('comments_shown') ?: 50,
+			'view_html' => (bool) $this->session->userdata('view_html') ?: TRUE,
 			);
 	}
 
