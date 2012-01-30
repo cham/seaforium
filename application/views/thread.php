@@ -161,7 +161,7 @@ foreach($comments as $row) {
 			&gt; <?=$pagination->thread ?>
 		</span>
 
-  <?php if ($information->enemies > 0) { ?>
+		<?php if ($information->enemies > 0) { ?>
 		<div class="toggle-enemy" id="toggle-enemy">
 			<?=$information->enemies ?> ENEMY POST<?=($information->enemies == 1 ? '' : 'S') ?> IGNORED
 		</div>
@@ -169,7 +169,7 @@ foreach($comments as $row) {
 		<script type="text/javascript">
 			$('.toggle-enemy').bind('click', function(){$('.ignore-container').click();})
 		</script>
-  <?php } ?>
+		<?php } ?>
 </div>
 
 <div class="dotted-bar replypad"></div>
@@ -205,7 +205,6 @@ else
 </div>
 <div id="reply-rc">
 <div id="pinkies">
-	<?php /*
   <a href="javascript:insertAtCaret('thread-content-input', '[:)]');">
     <img src="/img/pinkies/11.gif" /></a>
   <a href="javascript:insertAtCaret('thread-content-input', '[:(]');">
@@ -248,7 +247,6 @@ else
     <img src="/img/pinkies/26.gif" /></a>
   <a href="javascript:insertAtCaret('thread-content-input', '[fbm]');">
     <img src="/img/pinkies/21.gif" /></a>
-		*/?>
  </div>
 
 <form method="post" action="<?=uri_string() ?>" id="comment-form">
