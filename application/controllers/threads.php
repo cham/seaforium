@@ -1,4 +1,5 @@
 <?php
+
 class Threads extends Controller {
 
   var $meta;
@@ -11,14 +12,6 @@ class Threads extends Controller {
     $this->load->helper(array('date', 'url'));
     $this->load->library('pagination');
     $this->load->model('thread_dal');
-
-    // set all this so we dont have to continually call functions through session
-    $this->meta = array(
-      'user_id' => (int) $this->session->userdata('user_id'),
-      'username' => $this->session->userdata('username'),
-      'hide_enemy_posts' => $this->session->userdata('hide_enemy_posts'),
-      'threads_shown' => $this->session->userdata('threads_shown') === false ? 50 : $this->session->userdata('threads_shown')
-    );
   }
 
   function index($pagination = 0, $filter = '', $ordering = '', $dir = 'desc', $whostarted = '')

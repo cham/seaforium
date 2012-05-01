@@ -1,4 +1,4 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
 require_once('phpass-0.1/PasswordHash.php');
 
@@ -10,6 +10,12 @@ class Sauth
   function __construct()
   {
     $this->ci =& get_instance();
+
+    if ($this->ci->session->is_self_destruct())
+    {
+      $this->delete_autologin();
+      $this->ci->session->sess_destroy();
+    }
 
     $this->ci->load->database();
     $this->ci->load->model('user_dal');
