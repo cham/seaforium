@@ -69,6 +69,12 @@ foreach($comments as $row) {
     continue;
   }
 
+  $avatarUrl = "/img/emoticons/".($row->emoticon ? $row->author_id : '0').".gif";
+  // if the user is konik then he is a radish
+  if($row->author_id === 96){
+    $avatarUrl = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACyElEQVQ4EQXBS4iVdRwA0PP7HndmrpMzjS98ho/cZIlkGKPRCyNKcyXUIokW0aqNG1eSUasIgjZB0CJyI1GZuAgzCMyKiDDMhLAanBhzmHGye73P7/t3TqSUwEvn9wNIEolarZHlz/Xr4RdfXmx7fv8KI/Wk2dasKlWmRlbKAEIIIYQQkmR5Y+L4Q6v2nKaWQK1OlUEaGNYDVapkACmSJEkSkiRN37tsy4mtE+t8/2trb0RSS9sHafje0+sOVke2vZKGaXigAMgbhazORI1EUr95u/rH6Svz2t38wo6to9ebmhvXj95jRTFpzchajWjsKwCWJjoanVzZzxRVyJKZG/2bTl9aMtYojI8VG1tVz6U7l83emTWcT3Pt6r9jGcAHDzzj92bLTN5xY9h3q1u1B4O43eu5dnNxqJGHLEjCjf6S+d7C1jwKGcCSrjP3H/bV9CE/tVuuLnbPXrzaWr3477BcM1F83RwtdHu1PAtlnvfyyDshZABdlVazZ0nXz4cOutJbuPrHQqc31owHx5r5N9fmBmbn+7eGVXo8D8vKPFdkmQKgUmOoo7ehbbB547mRuL5vYbf2XavnBvnJfBBv5FkmiyCQSCgASKp+dWr0rUcPb9pzn18+ecJrH7979sLupQMzO7tWjhTG81KKhABQAGTSC+WuicPVyq7FW3+ZOrrbRyfffnbh9U8b40b768+c0qwYNEpZIkEKBUAtP5p+vK3V+U1vz936fy8Yf+weS8pHell5/s+DL9vx7YdaE4XUK+W9IIVIKYHP4tWZ9SY3jWsIlHuXyyZHtc/OPVwofmgojCmMKByZ+1zZyUQVIqUEjsWTJ7Zbf3yzVaaMKoVajSICIZMLhUwpl8sEIqUE9scGTc20yzZbrLbO1HdrLZ+GJIEQAiEEAhnAudl3djz14s73L7i8d8b8qlI+nQkBgCSpJbVapTZU+x/lqzXLT2UUYQAAAABJRU5ErkJggg==';
+  }
+
   // if the comment belongs to someone you've enemied
   if ($row->author_acquaintance_type == 2)
   {
@@ -101,7 +107,7 @@ foreach($comments as $row) {
           </a>
         </div>
         <div class="time"><?=timespan($row->created, time()) ?></div>
-        <div class="user-information" style="background: url(/img/emoticons/<?=$row->emoticon ? $row->author_id : '0'; ?>.gif);">
+        <div class="user-information" style="background: url(<?=$avatarUrl?>);">
           <ul>
           <?php if ($logged_in) { ?>
             <li><a href="/buddies/<?=$row->url_safe_author_name ?>"><?php echo ($row->author_acquaintance_name === 'buddy')? "Your $row->author_acquaintance_name!" : 'BUDDY? IGNORE?'; ?></a></li>
