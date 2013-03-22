@@ -2,6 +2,12 @@
 
 $logged_in = $this->sauth->is_logged_in();
 
+function replaceContent($content){
+  $patterns = array('/\bu mad\b/','/\bhe mad\b/');
+  $replacements = array('u hott','he hott');
+  return preg_replace($patterns, $replacements, $content);
+}
+
 ?>
 
 <div id="thread">
@@ -145,7 +151,7 @@ foreach($comments as $row) {
         <div class="content">
           <?php
             if (!$row->author_banned) {
-              echo $row->content;
+              echo replaceContent($row->content);
             } else {
               ?>
           <div class="censor">user has been banned, click here to see original content
