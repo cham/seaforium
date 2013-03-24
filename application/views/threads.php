@@ -103,17 +103,9 @@ foreach($thread_result->result() as $row) {
 
   if ($row->acq == 2) {
 
-    if ($this->meta['hide_enemy_posts'] === '1') {
-      continue;
-    }
+    continue;
 
-    ?>
-
-<div id="ignore-for-<?php echo $row->thread_id; ?>" class="ignore-container"
-     onclick="$('#thread-<?php echo $row->thread_id; ?>').toggle();"></div>
-
-<?php
-   }
+  }
 
   $favorite = in_array($row->thread_id, $favorites) ? ' added' : '';
   $hidden = in_array($row->thread_id, $hidden_threads) ? ' added' : '';

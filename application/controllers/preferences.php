@@ -124,7 +124,7 @@ class Preferences extends Controller {
         'comments_shown' => $this->form_validation->set_value('comments_shown'),
         'new_post_notification' => $this->form_validation->set_value('new_post_notification') ?: 0,
         'random_titles' => $this->form_validation->set_value('random_titles') ?: 0,
-        'hide_enemy_posts' => $this->form_validation->set_value('hide_enemy_posts') ?: 0,
+        'hide_enemy_posts' => 1,
         'custom_css' => $this->form_validation->set_value('custom_css'),
         'custom_js' => $this->form_validation->set_value('custom_js'),
         'chat_fixed_size' => $this->form_validation->set_value('chat_fixed_size') ?: 0,

@@ -31,12 +31,6 @@ $logged_in = $this->sauth->is_logged_in();
       &gt; <?=$pagination->category ?>
       &gt; <?=$pagination->thread ?>
     </span>
-
-    <?php if ($information->enemies > 0 && $this->meta['hide_enemy_posts'] !== '1') { ?>
-      <div class="toggle-enemy">
-        <?=$information->enemies ?> POST<?=($information->enemies == 1 ? '' : 'S') ?> IGNORED
-      </div>
-    <?php } ?>
   </div>
 
 <?php
@@ -72,12 +66,7 @@ foreach($comments as $row) {
   // if the comment belongs to someone you've enemied
   if ($row->author_acquaintance_type == 2)
   {
-    if ($this->meta['hide_enemy_posts'] === '1')
-      continue;
-
-  ?>
-  <div id="ignore-for-<?=$row->comment_id ?>" class="ignore-container" onclick="$('#comment-container-<?=$row->comment_id ?>').toggle();"></div>
-  <?php
+    continue;
   } ?>
 
   <div id="comment-<?=$row->comment_id ?>" class="comment userid-<?=$row->author_id;?> <?=$row->author_acquaintance_name; ?> <?=($row->owner ? ' mycomment' : ''); ?>">
@@ -173,15 +162,6 @@ foreach($comments as $row) {
       &gt; <?=$pagination->thread ?>
     </span>
 
-  <?php if ($information->enemies > 0) { ?>
-    <div class="toggle-enemy" id="toggle-enemy">
-      <?=$information->enemies ?> ENEMY POST<?=($information->enemies == 1 ? '' : 'S') ?> IGNORED
-    </div>
-
-    <script type="text/javascript">
-      $('.toggle-enemy').bind('click', function(){$('.ignore-container').click();})
-    </script>
-  <?php } ?>
 </div>
 
 <div class="dotted-bar replypad"></div>

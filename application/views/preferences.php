@@ -385,16 +385,6 @@
 </div>
 
 <div class="input text">
-  <label for="hide_enemy_posts">Hide Enemy Posts</label>
-  <?php echo form_checkbox(array(
-      'name' => 'hide_enemy_posts',
-      'id' => 'hide_enemy_posts',
-      'value' => '1',
-      'checked' => $user_preferences->hide_enemy_posts
-    )); ?>
-</div>
-
-<div class="input text">
   <label for="custom_css">Custom CSS</label>
   <?php echo form_input('custom_css', $user_preferences->custom_css); ?>
 </div>
