@@ -3,8 +3,8 @@
 $logged_in = $this->sauth->is_logged_in();
 
 function replaceContent($content){
-  $patterns = array('/\bu mad\b/','/\bhe mad\b/');
-  $replacements = array('u hott','he hott');
+  $patterns = array('/\bu mad\b/','/\bhe mad\b/','/\bU mad\b/','/\bHe mad\b/');
+  $replacements = array('u hott','he hott','U hott','He hott');
   return preg_replace($patterns, $replacements, $content);
 }
 
